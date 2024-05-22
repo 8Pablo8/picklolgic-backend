@@ -5,7 +5,6 @@
   "scripts": {
     "test": "jest",
     "dev": "nodemon server.js",
-    "preinstall": "bash install_chrome.sh",
     "start": "node server.js"
   },
   "keywords": [],
