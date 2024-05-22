@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const obtenerRecomendaciones = require('./obtenerRecomendaciones');
 const enfrentamientos = require('./enfrentamientos');
 const buscarSinergia = require('./BuscarSinergia');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');  // Usar puppeteer-core para especificar el path de Chrome
 const path = require('path');
 
 const app = express();
@@ -62,7 +62,9 @@ let browser, page;
 // Función para iniciar el navegador Puppeteer una vez
 async function initBrowser() {
   if (!browser) {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+      executablePath: '/usr/bin/google-chrome-stable'  // Ruta donde Chrome se instala
+    });
     page = await browser.newPage();
 
     // Desactivar imágenes y otros recursos no esenciales
