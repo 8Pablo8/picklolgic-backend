@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const obtenerRecomendaciones = require('./obtenerRecomendaciones');
 const enfrentamientos = require('./enfrentamientos');
 const buscarSinergia = require('./BuscarSinergia');
-const puppeteer = require('puppeteer');  // Usar puppeteer en lugar de puppeteer-core
+const puppeteer = require('puppeteer');
 const path = require('path');
 
 const app = express();

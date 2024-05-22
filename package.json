@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "preinstall": "bash install_puppeteer.sh",
     "test": "jest",
     "dev": "nodemon server.js",
     "start": "node server.js"
@@ -23,9 +24,5 @@
     "nodemon": "^3.1.0",
     "typescript": "^5.4.5"
   },
-  "private": false,
-  "puppeteer": {
-    "product": "chrome",
-    "default_browser_revision": "991974"
-  }
+  "private": false
 }
