@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const obtenerRecomendaciones = require('./obtenerRecomendaciones');
 const enfrentamientos = require('./enfrentamientos');
 const buscarSinergia = require('./BuscarSinergia');
-const puppeteer = require('puppeteer-core');  // Usar puppeteer-core para especificar el path de Chrome
+const puppeteer = require('puppeteer');  // Usar puppeteer en lugar de puppeteer-core
 const path = require('path');
 
 const app = express();
@@ -63,7 +63,7 @@ let browser, page;
 async function initBrowser() {
   if (!browser) {
     browser = await puppeteer.launch({
-      executablePath: '/usr/bin/google-chrome-stable'  // Ruta donde Chrome se instala
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     page = await browser.newPage();
 
