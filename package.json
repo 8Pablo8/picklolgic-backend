@@ -23,5 +23,9 @@
     "nodemon": "^3.1.0",
     "typescript": "^5.4.5"
   },
-  "private": false
+  "private": false,
+  "puppeteer": {
+    "product": "chrome",
+    "default_browser_revision": "991974"
+  }
 }
