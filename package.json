@@ -1,0 +1,27 @@
+{
+  "name": "pciklolgic_server_app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "8Pablo8 <pablollanamunoz@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "puppeteer": "^22.9.0",
+    "sqlite3": "^5.1.7"
+  },
+  "description": "Primer intento con las pautas de Martín Gesualdo",
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  },
+  "private": false
+}
