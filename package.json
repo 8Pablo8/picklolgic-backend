@@ -4,9 +4,9 @@
   "main": "server.js",
   "scripts": {
     "preinstall": "bash install_puppeteer.sh",
+    "start": "node server.js",
     "test": "jest",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "8Pablo8 <pablollanamunoz@gmail.com>",
