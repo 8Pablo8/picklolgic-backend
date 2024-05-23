@@ -1,20 +1,19 @@
-# Usa la imagen oficial de Node como base
+# Utiliza una imagen base de Node.js
 FROM node:latest
 
-# Instala las dependencias necesarias para Puppeteer y Chrome
-RUN apt-get update \
-    && apt-get install -y wget gnupg ca-certificates procps \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-    && apt-get update \
-    && apt-get install -y google-chrome-stable \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+# Instala las dependencias del sistema necesarias para Puppeteer y Chrome
+RUN apt-get update && \
+    apt-get install -y wget gnupg ca-certificates procps && \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
 
-# Establece el directorio de trabajo en el contenedor
+# Establece el directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copia los archivos de configuración de tu aplicación
+# Copia los archivos de configuración
 COPY package*.json ./
 
 # Instala las dependencias del proyecto
@@ -23,8 +22,8 @@ RUN npm install
 # Copia el resto de los archivos de la aplicación
 COPY . .
 
-# Expón el puerto en el que tu aplicación se ejecutará
+# Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 3001
 
-# Comando para ejecutar tu aplicación cuando se inicie el contenedor
+# Comando para ejecutar la aplicación
 CMD ["npm", "start"]
