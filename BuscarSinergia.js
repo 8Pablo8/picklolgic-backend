@@ -24,18 +24,15 @@ async function obtenerSinergias(browser, url) {
   }
 }
 
-async function buscarSinergia(aspirantes, aliados) {
+async function buscarSinergia(aspirantes, aliados, browser) {
   if (aspirantes.length < 2) {
     throw new Error('Se necesitan al menos dos aspirantes para buscar sinergias');
   }
 
-  const browser = await puppeteer.launch({ headless: true });
   const topDosAspirantes = aspirantes.slice(0, 2).map(normalizarNombreCampeon);
   console.log('Top dos aspirantes normalizados:', topDosAspirantes);
 
   const sinergiasAspirante = await obtenerSinergias(browser, `https://www.championcounter.es/${topDosAspirantes[1]}`);
-
-  await browser.close();
 
   let aspirantesOrdenados = [...aspirantes];
 

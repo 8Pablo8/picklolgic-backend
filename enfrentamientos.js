@@ -24,9 +24,7 @@ async function obtenerPuntuacion(browser, url) {
   }
 }
 
-async function enfrentamientos(aspirantes, rivales) {
-  const browser = await puppeteer.launch({ headless: true });
-  
+async function enfrentamientos(aspirantes, rivales, browser) {
   const tareas = [];
 
   for (const aspirante of aspirantes) {
@@ -45,8 +43,6 @@ async function enfrentamientos(aspirantes, rivales) {
   }
 
   const resultados = await Promise.all(tareas);
-
-  await browser.close();
 
   const medias = aspirantes.map(aspirante => {
     const puntuaciones = resultados

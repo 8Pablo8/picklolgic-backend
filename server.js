@@ -58,7 +58,6 @@ app.get('/api/campeones/autocompletar/:nombre', (req, res) => {
 });
 
 let browser;
-let page;
 
 // Función para iniciar el navegador Puppeteer una vez
 async function initBrowser() {
@@ -66,17 +65,6 @@ async function initBrowser() {
     browser = await puppeteer.launch({
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
       userDataDir: process.env.PUPPETEER_CACHE_DIR
-    });
-    page = await browser.newPage();
-
-    // Desactivar imágenes y otros recursos no esenciales
-    await page.setRequestInterception(true);
-    page.on('request', (req) => {
-      if (['image', 'stylesheet', 'font'].includes(req.resourceType())) {
-        req.abort();
-      } else {
-        req.continue();
-      }
     });
   }
 }
@@ -89,7 +77,7 @@ app.post('/api/recomendaciones', async (req, res) => {
   console.log('Posición recibida:', posicion);
 
   try {
-    const recomendaciones = await obtenerRecomendaciones(posicion, page);
+    const recomendaciones = await obtenerRecomendaciones(posicion, browser);
     console.log('Recomendaciones obtenidas:', recomendaciones);
     res.json(recomendaciones);
   } catch (error) {
@@ -127,7 +115,7 @@ app.get('/api/enfrentamientos', async (req, res) => {
     }
 
     console.log('Datos para enfrentamientos:', { topCincoAspirantes: storedData.topCincoAspirantes, rivales: storedData.rivales });
-    const resultados = await enfrentamientos(storedData.topCincoAspirantes, storedData.rivales);
+    const resultados = await enfrentamientos(storedData.topCincoAspirantes, storedData.rivales, browser);
     console.log('Resultados obtenidos:', resultados);
     res.json(resultados);
   } catch (error) {
@@ -153,7 +141,7 @@ app.post('/api/buscarSinergia', async (req, res) => {
   const { aspirantes, aliados } = req.body;
   console.log('Datos recibidos para buscar sinergia:', { aspirantes, aliados }); // Añadir log
   try {
-    const aspirantesOrdenados = await buscarSinergia(aspirantes, aliados);
+    const aspirantesOrdenados = await buscarSinergia(aspirantes, aliados, browser);
     console.log('Aspirantes ordenados por sinergia:', aspirantesOrdenados); // Añadir log
     res.json(aspirantesOrdenados);
   } catch (error) {

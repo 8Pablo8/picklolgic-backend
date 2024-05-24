@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 
-async function obtenerRecomendaciones(posicion, page) {
+async function obtenerRecomendaciones(posicion, browser) {
   const urlBase = 'https://lolalytics.com/lol/tierlist/';
   const url = `${urlBase}?lane=${posicion.toLowerCase()}`;
-
+  
+  const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'domcontentloaded' });
 
   const recomendaciones = await page.evaluate(() => {
@@ -21,6 +22,7 @@ async function obtenerRecomendaciones(posicion, page) {
     return nombres;
   });
 
+  await page.close();
   return recomendaciones;
 }
 
