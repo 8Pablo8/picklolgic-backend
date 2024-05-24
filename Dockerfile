@@ -25,6 +25,15 @@ COPY package*.json ./
 # Instala las dependencias del proyecto
 RUN npm install
 
+# Copia el script de compilación
+COPY render-build.sh /usr/src/app/render-build.sh
+
+# Da permisos de ejecución al script de compilación
+RUN chmod +x /usr/src/app/render-build.sh
+
+# Ejecuta el script de compilación
+RUN /usr/src/app/render-build.sh
+
 # Copia el resto de los archivos de la aplicación
 COPY . .
 
