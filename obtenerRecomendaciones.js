@@ -4,7 +4,7 @@ async function obtenerRecomendaciones(posicion, page) {
   const urlBase = 'https://lolalytics.com/lol/tierlist/';
   const url = `${urlBase}?lane=${posicion.toLowerCase()}`;
 
-  await page.goto(url, { waitUntil: 'networkidle0' });
+  await page.goto(url, { waitUntil: 'domcontentloaded' });
 
   const recomendaciones = await page.evaluate(() => {
     const nombres = [];

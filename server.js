@@ -57,7 +57,8 @@ app.get('/api/campeones/autocompletar/:nombre', (req, res) => {
   });
 });
 
-let browser, page;
+let browser;
+let page;
 
 // Función para iniciar el navegador Puppeteer una vez
 async function initBrowser() {

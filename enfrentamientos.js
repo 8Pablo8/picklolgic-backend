@@ -8,7 +8,7 @@ function normalizarNombreCampeon(nombre) {
 async function obtenerPuntuacion(browser, url) {
   const page = await browser.newPage();
   try {
-    await page.goto(url, { waitUntil: ['domcontentloaded'] }); // Reducir el waitUntil para acelerar la carga
+    await page.goto(url, { waitUntil: ['domcontentloaded'] });
 
     const valorEncontrado = await page.$eval('.mb-1.font-bold', el => {
       const texto = el.textContent.trim();
