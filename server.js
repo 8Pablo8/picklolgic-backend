@@ -63,7 +63,8 @@ let browser, page;
 async function initBrowser() {
   if (!browser) {
     browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      userDataDir: process.env.PUPPETEER_CACHE_DIR
     });
     page = await browser.newPage();
 

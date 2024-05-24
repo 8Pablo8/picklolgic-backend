@@ -3,7 +3,7 @@
 set -o errexit
 
 # Instalar las dependencias
-npm install
+#npm install
 # Ejecutar la construcción (descomenta esta línea si es necesario)
 # npm run build
 
