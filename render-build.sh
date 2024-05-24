@@ -7,8 +7,8 @@ npm install
 # Ejecutar la construcción (descomenta esta línea si es necesario)
 # npm run build
 
-# Almacenar/tomar la caché de Puppeteer con la caché de compilación
-if [[ ! -d $PUPPETEER_CACHE_DIR ]]; then 
+# Verificar si el directorio de la caché de Puppeteer existe antes de copiar los archivos
+if [[ -d $PUPPETEER_CACHE_DIR ]]; then 
   echo "...Copiando la caché de Puppeteer desde la caché de compilación" 
   cp -R $XDG_CACHE_HOME/puppeteer/ $PUPPETEER_CACHE_DIR
 else 
