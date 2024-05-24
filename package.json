@@ -6,7 +6,7 @@
     "start": "node server.js",
     "test": "jest",
     "dev": "nodemon server.js",
-    "postinstall": "bash render-build.sh"
+    "postinstall": "node render-build.js" 
   },
   "keywords": [],
   "author": "8Pablo8 <pablollanamunoz@gmail.com>",
