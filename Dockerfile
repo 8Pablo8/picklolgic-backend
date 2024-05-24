@@ -2,13 +2,19 @@
 FROM node:latest
 
 # Instala las dependencias del sistema necesarias para Puppeteer y Chrome
-RUN apt-get update && \
-    apt-get install -y wget gnupg ca-certificates procps && \
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update; apt-get clean
+
+# Install wget.
+RUN apt-get install -y wget
+
+RUN apt-get install -y gnupg
+
+# Set the Chrome repo.
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+
+# Install Chrome.
+RUN apt-get update && apt-get -y install google-chrome-stable
 
 # Establece el directorio de trabajo
 WORKDIR /usr/src/app
@@ -26,4 +32,4 @@ COPY . .
 EXPOSE 3001
 
 # Comando para ejecutar la aplicación
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
